@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MotoLog - Mockup</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>MotoLog</h1>
+    <p>Jurnal de mentenanță și revizii pentru motociclete.</p>
+    <p class="app-count">3 operațiuni, dintre care 2 active</p>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>Adaugă operațiune</h2>
+      <form class="item-form">
+        <label>
+          Titlu operațiune
+          <input type="text" name="titlu" placeholder="Ex: Yamaha MT-07 - Schimb ulei" />
+        </label>
+        <label>
+          Tip intervenție
+          <select name="tip">
+            <option value="consumabile">Consumabile</option>
+            <option value="reparatie">Reparație</option>
+            <option value="inspectie">Inspecție</option>
+          </select>
+        </label>
+        <button type="submit">Adaugă</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Operațiunile mele</h2>
+      <!-- Când lista e goală: <p class="empty">Nu există nicio operațiune înregistrată.</p> -->
+      <ul class="item-list">
+        <li class="item-card">
+          <div>
+            <h3>Yamaha MT-07 - Schimb ulei și filtru</h3>
+            <span class="badge badge-consumabile">Consumabile</span>
+          </div>
+          <span class="status">Activ</span>
+        </li>
+        <li class="item-card done">
+          <div>
+            <h3>Honda Hornet - Înlocuire plăcuțe frână</h3>
+            <span class="badge badge-reparatie">Reparație</span>
+          </div>
+          <span class="status">Finalizat</span>
+        </li>
+        <li class="item-card">
+          <div>
+            <h3>Kawasaki Ninja 400 - Verificare joc lanț</h3>
+            <span class="badge badge-inspectie">Inspecție</span>
+          </div>
+          <span class="status">Activ</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="app-footer">Proiect Tehnologii Web</footer>
+</body>
+</html>
