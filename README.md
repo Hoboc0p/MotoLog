@@ -22,6 +22,7 @@ Sample data used across all stages:
 | Tool | Used for |
 | --- | --- |
 | Gemini | data model structure, Stage 1 html and css layout |
+| Gemini | generating JavaScript code, help with console tests |
 
 Details per stage: see the `ai-log/` folder.
 
@@ -30,7 +31,11 @@ Open `index.html` in a browser. No build step, no server.
 
 ## Status
 - [x] Stage 1: static mockup
-- [ ] Stage 2: data logic in JavaScript
+- [x] Stage 2: data logic in JavaScript
+- [ ] Stage 3: Vite and React project
+
+## Stage 2: data logic
+Plain JavaScript, no DOM. moto.js holds the array and the functions that read and change it. Results are printed in the browser console (F12).
 
 ## Checklist
 
