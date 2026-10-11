@@ -21,8 +21,8 @@ Sample data used across all stages:
 
 | Tool | Used for |
 | --- | --- |
-| Gemini | data model structure, Stage 1 html and css layout |
-| Gemini | generating JavaScript code, help with console tests |
+| Gemini | data model structure, Stage 1 html and css layout, generating JavaScript code, help with console tests |
+
 
 Details per stage: see the `ai-log/` folder.
 
@@ -49,3 +49,11 @@ Plain JavaScript, no DOM. moto.js holds the array and the functions that read an
 | S1-R6 | 2 columns on desktop, 1 under 700px | [desktop](https://github.com/Hoboc0p/MotoLog/blob/639428ee690823ea8a569ad1592a912a4135fa35/style.css#L60-L68), [mobile](https://github.com/Hoboc0p/MotoLog/blob/639428ee690823ea8a569ad1592a912a4135fa35/style.css#L171-L175) | resize < 700px |
 | S1-R7 | visible focus, readable dark theme | [focus](https://github.com/Hoboc0p/MotoLog/blob/639428ee690823ea8a569ad1592a912a4135fa35/style.css#L166-L169), [darkmode](https://github.com/Hoboc0p/MotoLog/blob/639428ee690823ea8a569ad1592a912a4135fa35/style.css#L20-L29) | Tab; dark mode |
 | S1-R8 | commit "Stage 1" pushed | [commit](https://github.com/Hoboc0p/MotoLog/commit/639428ee690823ea8a569ad1592a912a4135fa35) | commit history |
+| --- | --- | --- | --- |
+| S2-R1 | JS file linked, logs on page load | [index.html#L..](https://github.com/Hoboc0p/MotoLog/blob/573d4f5c660e9a0afb9e477266d1fc469702a50c/index.html#L66) | open page, F12 |
+| S2-R2 | 3+ items with id, name, state, tag | [interventii.js#L..-L..](https://github.com/Hoboc0p/MotoLog/blob/573d4f5c660e9a0afb9e477266d1fc469702a50c/interventii.js#L4-L8) | read |
+| S2-R3 | list, count, search, add, toggle, delete | [interventii.js#L..-L..](https://github.com/Hoboc0p/MotoLog/blob/573d4f5c660e9a0afb9e477266d1fc469702a50c/interventii.js#L10-L63) | console output |
+| S2-R4 | add rejects empty name and invalid tag | [interventii.js#L..-L..](https://github.com/Hoboc0p/MotoLog/blob/573d4f5c660e9a0afb9e477266d1fc469702a50c/interventii.js#L31-L42) | read |
+| S2-R5 | original array unchanged after add | [interventii.js#L..](https://github.com/Hoboc0p/MotoLog/blob/573d4f5c660e9a0afb9e477266d1fc469702a50c/interventii.js#L74) | console line |
+| S2-R6 | README Stage 2 section + AI log | [README.md](https://github.com/Hoboc0p/MotoLog/blob/main/README.md#stage-2-data-logic), [ai-log/etapa-02.md](https://github.com/Hoboc0p/MotoLog/blob/main/ai-log/etapa-02.md#stage-2-ai-log) | read |
+| S2-R7 | commit "Stage 2" pushed | [commit](https://github.com/Hoboc0p/MotoLog/commit/573d4f5c660e9a0afb9e477266d1fc469702a50c) | commit history |
