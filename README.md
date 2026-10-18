@@ -67,3 +67,11 @@ Then open the address printed in the terminal (http://localhost:5173).
 | S2-R5 | original array unchanged after add | [interventii.js#L..](https://github.com/Hoboc0p/MotoLog/blob/573d4f5c660e9a0afb9e477266d1fc469702a50c/interventii.js#L74) | console line |
 | S2-R6 | README Stage 2 section + AI log | [README.md](https://github.com/Hoboc0p/MotoLog/blob/main/README.md#stage-2-data-logic), [ai-log/etapa-02.md](https://github.com/Hoboc0p/MotoLog/blob/main/ai-log/etapa-02.md#stage-2-ai-log) | read |
 | S2-R7 | commit "Stage 2" pushed | [commit](https://github.com/Hoboc0p/MotoLog/commit/573d4f5c660e9a0afb9e477266d1fc469702a50c) | commit history |
+| --- | --- | --- | --- |
+| S3-R1 | npm run dev starts without errors | [frontend/package.json](https://github.com/Hoboc0p/MotoLog/blob/56285b3d04f55c82a553c40b4a54b00fb0315513/frontend/package.json#L6-L11) | npm install, npm run dev |
+| S3-R2 | app name and counter computed from data | [frontend/src/App.jsx#L..-L..](https://github.com/Hoboc0p/MotoLog/blob/56285b3d04f55c82a553c40b4a54b00fb0315513/frontend/src/App.jsx#L6-L19) | edit data, save |
+| S3-R3 | data from README, not from the example | [frontend/src/App.jsx#L..-L..](https://github.com/Hoboc0p/MotoLog/blob/56285b3d04f55c82a553c40b4a54b00fb0315513/frontend/src/App.jsx#L2-L4) | compare with README |
+| S3-R4 | stage 1 styles reused | [frontend/src/App.css](https://github.com/Hoboc0p/MotoLog/blob/56285b3d04f55c82a553c40b4a54b00fb0315513/frontend/src/App.css#L1-L182) | look at the page |
+| S3-R5 | node_modules ignored, build passes | [frontend/.gitignore](https://github.com/Hoboc0p/MotoLog/blob/56285b3d04f55c82a553c40b4a54b00fb0315513/frontend/.gitignore#L10) | npm run build |
+| S3-R6 | README Stage 3 section + AI log | [README.md](https://github.com/Hoboc0p/MotoLog/blob/main/README.md#stage-3-vite-and-react-project), [ai-log/etapa-03.md](https://github.com/Hoboc0p/MotoLog/blob/main/ai-log/etapa-03.md#stage-3-ai-log) | read |
+| S3-R7 | commit "Stage 3" pushed | [commit](https://github.com/Hoboc0p/MotoLog/commit/56285b3d04f55c82a553c40b4a54b00fb0315513) | commit history |
