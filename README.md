@@ -82,3 +82,11 @@ The list is rendered from the data, through two components:
 | S3-R5 | node_modules ignored, build passes | [frontend/.gitignore](https://github.com/Hoboc0p/MotoLog/blob/56285b3d04f55c82a553c40b4a54b00fb0315513/frontend/.gitignore#L10) | npm run build |
 | S3-R6 | README Stage 3 section + AI log | [README.md](https://github.com/Hoboc0p/MotoLog/blob/main/README.md#stage-3-vite-and-react-project), [ai-log/etapa-03.md](https://github.com/Hoboc0p/MotoLog/blob/main/ai-log/etapa-03.md#stage-3-ai-log) | read |
 | S3-R7 | commit "Stage 3" pushed | [commit](https://github.com/Hoboc0p/MotoLog/commit/56285b3d04f55c82a553c40b4a54b00fb0315513) | commit history |
+| --- | --- | --- | --- |
+| S4-R1 | 2+ components in src/components/ | [frontend/src/components/](https://github.com/Hoboc0p/MotoLog/tree/main/frontend/src/components) | open folder |
+| S4-R2 | card receives data through props | [frontend/src/components/LogCard.jsx#L8-L20](https://github.com/Hoboc0p/MotoLog/blob/d219fc74dfc6d3fec412345087e4e5b7f04afb2e/frontend/src/components/InterventieCard.jsx#L7-L19) | read |
+| S4-R3 | map + key={id}, no console warnings | [frontend/src/components/LogList.jsx#L10-L14](https://github.com/Hoboc0p/MotoLog/blob/d219fc74dfc6d3fec412345087e4e5b7f04afb2e/frontend/src/components/InterventiiList.jsx#L8-L14) | F12, Console |
+| S4-R4 | message for empty list | [frontend/src/components/LogList.jsx#L4-L6](https://github.com/Hoboc0p/MotoLog/blob/d219fc74dfc6d3fec412345087e4e5b7f04afb2e/frontend/src/components/InterventiiList.jsx#L4-L6) | set array to [] |
+| S4-R5 | state changes the card look | [frontend/src/components/LogCard.jsx#L12](https://github.com/Hoboc0p/MotoLog/blob/d219fc74dfc6d3fec412345087e4e5b7f04afb2e/frontend/src/components/InterventieCard.jsx#L11) | toggle a done flag |
+| S4-R6 | README Stage 4 section + AI log | [README.md](https://github.com/Hoboc0p/MotoLog/blob/main/README.md#stage-4-components), [ai-log/etapa-04.md](https://github.com/Hoboc0p/MotoLog/blob/main/ai-log/etapa-04.md) | read |
+| S4-R7 | commit "Stage 4" pushed | [commit](https://github.com/Hoboc0p/MotoLog/commit/d219fc74dfc6d3fec412345087e4e5b7f04afb2e) | commit history |
