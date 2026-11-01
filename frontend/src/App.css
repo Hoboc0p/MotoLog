@@ -3,180 +3,735 @@
 }
 
 :root {
-  --bg: #f4f5f7;
+  --bg: #f4f5f8;
   --card: #ffffff;
-  --text: #1f2933;
-  --muted: #6b7280;
-  --accent: #d9480f;
-  --accent-dark: #bf3906;
-  --accent-soft: #ffe8cc;
-  --border: #e5e7eb;
-
-  --badge-consumabile: #2b8a3e;
-  --badge-reparatie: #d6336c;
-  --badge-inspectie: #1098ad;
+  --text: #1a1e24;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --accent: #f95700; /* Moto Racing Orange */
+  --accent-dark: #d84500;
+  --accent-soft: rgba(249, 87, 0, 0.1);
+  --badge-consumabile: #10b981;
+  --badge-reparatie: #ef4444;
+  --badge-inspectie: #f59e0b;
+  --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --card-hover-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
 }
 
+/* Tema sistemului (dacă nu e selectat manual light) */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14121d;
-    --card: #1e1b2e;
-    --text: #e5e7eb;
-    --muted: #9ca3af;
-    --border: #352f4d;
-    --accent-soft: #3b1d11;
+  :root:not([data-theme="light"]) {
+    --bg: #0d0f12; /* Asfalt / Carbon mat */
+    --card: #161920;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --border: #232936;
+    --accent-soft: rgba(249, 87, 0, 0.18);
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
+}
+
+/* Comutare explicită pe modul Dark din buton */
+:root[data-theme="dark"] {
+  --bg: #0d0f12;
+  --card: #161920;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --border: #232936;
+  --accent-soft: rgba(249, 87, 0, 0.18);
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.5;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+/* Antet inspirat din bordurile moto */
 .app-header {
-  background: var(--accent);
+  position: relative;
+  background: linear-gradient(135deg, #121418 0%, #1e232d 100%);
   color: #ffffff;
   text-align: center;
-  padding: 32px 16px;
+  padding: 48px 16px 36px;
+  border-bottom: 3px solid var(--accent);
 }
 
 .app-header h1 {
-  margin: 0 0 8px;
+  margin: 0 0 6px 0;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .app-header p {
-  margin: 0;
+  margin: 4px 0;
+  color: #94a3b8;
 }
 
 .app-count {
-  margin-top: 8px !important;
-  font-size: 0.9rem;
-  opacity: 0.9;
+  display: inline-block;
+  margin-top: 10px !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
 }
 
+/* Buton comutare temă */
+.theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  padding: 7px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Container principal */
 .container {
-  max-width: 1000px;
-  margin: 24px auto;
-  padding: 0 16px;
+  max-width: 860px;
+  margin: 32px auto;
+  padding: 0 20px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  align-items: start;
 }
 
 .panel {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .panel h2 {
-  margin-top: 0;
-  margin-bottom: 16px;
-}
-
-.item-form {
+  margin: 0 0 20px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  gap: 8px;
 }
 
-.item-form label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-weight: 500;
+/* Layout Garaj - 2 Coloane */
+.container-garage {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  align-items: start;
 }
 
-.item-form input,
-.item-form select {
-  padding: 10px 12px;
+/* Sidebar Garaj */
+.garage-sidebar {
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--bg);
-  color: var(--text);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+}
+
+.garage-sidebar h3 {
+  margin: 0 0 16px 0;
   font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
 }
 
-.item-form button {
-  background: var(--accent);
-  color: #ffffff;
-  border: none;
+.moto-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.moto-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 12px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-align: left;
+  color: var(--text);
+  font: inherit;
+  transition: all 0.2s ease;
 }
 
-.item-form button:hover {
-  background: var(--accent-dark);
+.moto-card-btn:hover {
+  border-color: var(--accent);
 }
 
+.moto-card-btn.active {
+  background: var(--card);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft), var(--card-shadow);
+}
+
+.moto-icon {
+  font-size: 1.4rem;
+}
+
+.moto-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.moto-info strong {
+  font-size: 0.88rem;
+}
+
+.moto-info small {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.moto-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 12px;
+}
+
+/* Conținut garaj dreapta */
+.garage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (max-width: 860px) {
+  .container-garage {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Lista și Cardurile de operațiuni */
 .item-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .item-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
+  padding: 16px 20px;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  transition: border-color 0.2s, background-color 0.2s;
+  border-left: 5px solid var(--accent);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+/* Zona principală de selecție */
+.task-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.task-main input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.task-main input[type="checkbox"]:hover {
   border-color: var(--accent);
-  background-color: var(--accent-soft);
+}
+
+.task-main input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.task-main input[type="checkbox"]:checked::before {
+  content: "✔";
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .item-card h3 {
-  margin: 0 0 6px;
-  font-size: 1rem;
+  margin: 0 0 6px 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
 }
 
-.badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  border-radius: 999px;
-  color: #ffffff;
+/* Card finalizat */
+.item-card.done {
+  border-left-color: var(--muted);
+  opacity: 0.7;
 }
-
-.badge-consumabile { background-color: var(--badge-consumabile); }
-.badge-reparatie { background-color: var(--badge-reparatie); }
-.badge-inspectie { background-color: var(--badge-inspectie); }
 
 .item-card.done h3 {
   text-decoration: line-through;
   color: var(--muted);
 }
 
+/* Badge-uri tehnice */
+.badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 6px;
+  color: #ffffff;
+}
+
+.badge-consumabile { background: var(--badge-consumabile); }
+.badge-reparatie { background: var(--badge-reparatie); }
+.badge-inspectie { background: var(--badge-inspectie); }
+
+.status {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Buton Ștergere */
+.btn-danger {
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: transparent;
+  color: #ef4444;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 36px 0;
+  font-size: 1rem;
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 @media (max-width: 700px) {
-  .container {
+  .app-header {
+    padding: 40px 16px 28px;
+  }
+  
+  .theme-toggle {
+    position: static;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  
+  .item-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .btn-danger {
+    align-self: flex-end;
+  }
+}
+
+/* Bara de progres moto */
+.progress-box {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent) 0%, #10b981 100%);
+  border-radius: 9999px;
+  transition: width 0.35s ease;
+}
+
+/* Cursor cheie mecanică generat prin SVG */
+body {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23f95700' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'></path></svg>") 4 4, auto;
+}
+
+button, input[type="checkbox"], .task-main {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23f95700' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'></path></svg>") 4 4, pointer !important;
+}
+
+/* Mini-Dashboard */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: var(--card-shadow);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.active-card {
+  border-bottom: 3px solid var(--accent);
+}
+
+.done-card {
+  border-bottom: 3px solid #10b981;
+}
+
+/* Header Panou & Buton Curățare */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.panel-header h2 {
+  margin: 0;
+}
+
+.btn-clear-done {
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-clear-done:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+/* Empty State Stilizat */
+.empty-state {
+  text-align: center;
+  padding: 40px 16px;
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.empty-state h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+@media (max-width: 600px) {
+  .dashboard-grid {
     grid-template-columns: 1fr;
   }
 }
 
-.app-footer {
-  text-align: center;
-  padding: 24px;
+/* Filtrare tip pills */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
   color: var(--muted);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+/* Afișare cost pe card */
+.cost-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+/* Dimensiune unitate de măsură în dashboard */
+.stat-value small {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Acțiuni panou & Buton Fișă */
+.panel-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-fisa {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.btn-fisa:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Modal Fișă Tehnică */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.fisa-sheet {
+  padding: 20px;
   font-size: 0.9rem;
 }
+
+.fisa-meta {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+
+.fisa-section h4 {
+  margin: 12px 0 6px 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.fisa-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fisa-section li {
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.mono {
+  font-family: monospace;
+}
+
+.text-muted {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-copy {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+}
+
+.btn-copy:hover {
+  opacity: 0.9;
+}
+

@@ -34,7 +34,8 @@ Open `index.html` in a browser. No build step, no server.
 - [x] Stage 2: data logic in JavaScript
 - [x] Stage 3: Vite and React project
 - [x] Stage 4: components rendered from data
-- [ ] Stage 5: local state and events
+- [x] Stage 5: local state and events
+- [ ] Stage 6: loading data from a mock API
 
 ## Stage 2: data logic
 Plain JavaScript, no DOM. moto.js holds the array and the functions that read and change it. Results are printed in the browser console (F12).
@@ -52,6 +53,9 @@ Then open the address printed in the terminal (http://localhost:5173).
 The list is rendered from the data, through two components:
 - `InterventiiList` receives the whole array and renders one card per item
 - `InterventieCard` receives a single item through props and displays it
+
+## Stage 5: local state and events
+The list lives in React state. Checking and deleting work from the page, and the counters in the header follow automatically. A button in the header switches between light and dark mode. Changes are lost on refresh, which is what stage 6 and stage 10 fix.
 
 
 ## Checklist
