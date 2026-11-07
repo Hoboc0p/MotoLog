@@ -1,0 +1,44 @@
+{
+  "interventii": [
+    {
+      "id": 1,
+      "motoId": "yamaha",
+      "title": "Yamaha MT-07 - Schimb ulei și filtru",
+      "is_done": false,
+      "type": "Consumabile",
+      "cost": 350
+    },
+    {
+      "id": 2,
+      "motoId": "honda",
+      "title": "Honda Hornet - Înlocuire plăcuțe frână",
+      "is_done": true,
+      "type": "Reparație",
+      "cost": 220
+    },
+    {
+      "id": 3,
+      "motoId": "kawasaki",
+      "title": "Kawasaki Ninja 400 - Verificare joc lanț",
+      "is_done": false,
+      "type": "Inspecție",
+      "cost": 100
+    },
+    {
+      "id": 4,
+      "motoId": "yamaha",
+      "title": "Yamaha MT-07 - Schimb lichid de frână",
+      "is_done": false,
+      "type": "Consumabile",
+      "cost": 150
+    },
+    {
+      "id": 5,
+      "motoId": "honda",
+      "title": "Honda Hornet - Sincronizare carburatoare / clapete",
+      "is_done": true,
+      "type": "Reparație",
+      "cost": 400
+    }
+  ]
+}

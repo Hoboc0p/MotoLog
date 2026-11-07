@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InterventiiList from "./components/InterventiiList.jsx";
+import { fetchInterventii } from "./api.js";
 
 const MOTOCICLETE = [
   { id: "toate", nume: "Toate Motocicletele", model: "Flotă completă", icon: "🏍️" },
@@ -8,23 +9,41 @@ const MOTOCICLETE = [
   { id: "kawasaki", nume: "Kawasaki Ninja 400", model: "2022 • 399cc", icon: "🟢" }
 ];
 
-const INTERVENTII_INITIALE = [
-  { id: 1, motoId: "yamaha", title: "Yamaha MT-07 - Schimb ulei și filtru", is_done: false, type: "Consumabile", cost: 350 },
-  { id: 2, motoId: "honda", title: "Honda Hornet - Înlocuire plăcuțe frână", is_done: true, type: "Reparație", cost: 220 },
-  { id: 3, motoId: "kawasaki", title: "Kawasaki Ninja 400 - Verificare joc lanț", is_done: false, type: "Inspecție", cost: 100 }
-];
-
 function temaInitiala() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 export default function App() {
-  const [interventii, setInterventii] = useState(INTERVENTII_INITIALE);
+  const [interventii, setInterventii] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [tema, setTema] = useState(temaInitiala);
   const [selectedMoto, setSelectedMoto] = useState("toate");
   const [filtruTip, setFiltruTip] = useState("toate");
   const [showFisa, setShowFisa] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function load() {
+      try {
+        const data = await fetchInterventii();
+        if (!ignore) setInterventii(data);
+      } catch (err) {
+        if (!ignore) setError(err.message);
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    }
+
+    load();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   function handleToggle(id) {
     setInterventii((prev) =>
@@ -46,7 +65,6 @@ export default function App() {
     document.documentElement.dataset.theme = noua;
   }
 
-  // Filtrare cumulată: motocicletă + tip intervenție
   const interventiiFiltrate = interventii.filter((item) => {
     const matchMoto = selectedMoto === "toate" || item.motoId === selectedMoto;
     const matchTip = filtruTip === "toate" || item.type === filtruTip;
@@ -95,7 +113,6 @@ ${active.length > 0 ? active.map(i => `⏳ [${i.type}] ${i.title} — ${i.cost} 
       </header>
 
       <main className="container-garage">
-        {/* Coloana Stângă: Selector Garaj */}
         <aside className="garage-sidebar">
           <h3>Garajul Meu</h3>
           <div className="moto-selector">
@@ -122,7 +139,6 @@ ${active.length > 0 ? active.map(i => `⏳ [${i.type}] ${i.title} — ${i.cost} 
           </div>
         </aside>
 
-        {/* Coloana Dreaptă: Date și Intervenții */}
         <section className="garage-content">
           <section className="dashboard-grid">
             <div className="stat-card">
@@ -176,16 +192,26 @@ ${active.length > 0 ? active.map(i => `⏳ [${i.type}] ${i.title} — ${i.cost} 
               </div>
             </div>
 
-            <InterventiiList
-              interventii={interventiiFiltrate}
-              onToggle={handleToggle}
-              onDelete={handleDelete}
-            />
+            {/* Cele trei stări: Încărcare, Eroare sau Conținut */}
+            {loading && <p className="info">Se încarcă garajul...</p>}
+
+            {error && (
+              <p className="error">
+                Nu am putut încărca datele: {error}. Rulează <code>npm run api</code>?
+              </p>
+            )}
+
+            {!loading && !error && (
+              <InterventiiList
+                interventii={interventiiFiltrate}
+                onToggle={handleToggle}
+                onDelete={handleDelete}
+              />
+            )}
           </div>
         </section>
       </main>
 
-      {/* Modal Fișă Tehnică */}
       {showFisa && (
         <div className="modal-overlay" onClick={() => setShowFisa(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
