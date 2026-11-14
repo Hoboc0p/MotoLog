@@ -3,7 +3,7 @@ import InterventieCard from "./InterventieCard.jsx";
 export default function InterventiiList({ interventii, onToggle, onDelete }) {
   if (interventii.length === 0) {
     return (
-      <div className="empty-state">
+      <div className="empty-state" data-testid="empty">
         <div className="empty-icon">🔧</div>
         <h3>Nicio operațiune găsită!</h3>
         <p>Nu există nicio intervenție înregistrată pentru această selecție.</p>

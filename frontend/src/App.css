@@ -764,3 +764,77 @@ button, input[type="checkbox"], .task-main {
   border-radius: 4px;
   font-family: monospace;
 }
+
+/* Etapa 7: Formular și Validare */
+.garage-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.garage-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row label {
+  flex: 1;
+}
+
+.garage-form input,
+.garage-form select {
+  width: 100%; /* Forțează elementul să se încadreze în coloana lui */
+  box-sizing: border-box; /* Include padding-ul în lățimea totală, prevenind ieșirea din contur */
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  outline: none;
+}
+
+.garage-form input:focus,
+.garage-form select:focus {
+  border-color: var(--accent);
+}
+
+.btn-submit {
+  margin-top: 8px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-submit:hover {
+  opacity: 0.9;
+}
+
+/* Starea de validare eronată și buton dezactivat */
+.garage-form input[aria-invalid="true"] {
+  border-color: var(--error-text);
+  background-color: var(--error-bg);
+}
+
+.garage-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

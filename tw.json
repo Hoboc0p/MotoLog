@@ -1,0 +1,10 @@
+{
+  "resource": "interventii",
+  "title": "title",
+  "done": "is_done",
+  "sample": {
+    "motoId": "honda",
+    "type": "Reparație",
+    "cost": "150"
+  }
+}

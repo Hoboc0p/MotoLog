@@ -36,7 +36,8 @@ Open `index.html` in a browser. No build step, no server.
 - [x] Stage 4: components rendered from data
 - [x] Stage 5: local state and events
 - [x] Stage 6: loading data from a mock API
-- [ ] Stage 7: form and validation
+- [x] Stage 7: form and validation
+- [ ] Stage 8: routing and detail page
 
 ## Stage 2: data logic
 Plain JavaScript, no DOM. moto.js holds the array and the functions that read and change it. Results are printed in the browser console (F12).
@@ -63,6 +64,11 @@ The list is served by json-server from `db.json`. The app fetches it on load
 and shows a loading state and an error state.
  npm run api # terminal 1, http://localhost:3001
  npm run dev # terminal 2, http://localhost:5173
+
+## Stage 7: form and validation
+Tasks can be added from the page. The form is controlled and validated,
+and every change (add, toggle, delete) goes to the API before it shows up
+in the list.
 
 
 ## Checklist
@@ -103,7 +109,7 @@ and shows a loading state and an error state.
 | S4-R7 | commit "Stage 4" pushed | [commit](https://github.com/Hoboc0p/MotoLog/commit/d219fc74dfc6d3fec412345087e4e5b7f04afb2e) | commit history |
 | --- | --- | --- | --- |
 | S5-R1 | list kept in useState, in App | [frontend/src/App.jsx#L16](https://github.com/Hoboc0p/MotoLog/blob/a0e579a6c48bbe208bfa0541f5c1926c4726134f/frontend/src/App.jsx#L22) | read |
-| S5-R2 | toggling changes state and card look | [frontend/src/App.jsx#L29-L33](https://github.com/Hoboc0p/MotoLog/blob/a0e579a6c48bbe208bfa0541f5c1926c4726134f/frontend/src/App.jsx#L29-L33, [frontend/src/components/InterventieCard.jsx#L11-L16](https://github.com/Hoboc0p/MotoLog/blob/a0e579a6c48bbe208bfa0541f5c1926c4726134f/frontend/src/components/InterventieCard.jsx#L11-L16) | click a checkbox |
+| S5-R2 | toggling changes state and card look | [frontend/src/App.jsx#L29-L33](https://github.com/Hoboc0p/MotoLog/blob/a0e579a6c48bbe208bfa0541f5c1926c4726134f/frontend/src/App.jsx#L29-L33), [frontend/src/components/InterventieCard.jsx#L11-L16](https://github.com/Hoboc0p/MotoLog/blob/a0e579a6c48bbe208bfa0541f5c1926c4726134f/frontend/src/components/InterventieCard.jsx#L11-L16) | click a checkbox |
 | S5-R3 | delete removes the item | [frontend/src/App.jsx#L35-L37](https://github.com/Hoboc0p/MotoLog/blob/a0e579a6c48bbe208bfa0541f5c1926c4726134f/frontend/src/App.jsx#L35-L37), [frontend/src/components/InterventieCard.jsx#L26-L32](https://github.com/Hoboc0p/MotoLog/blob/a0e579a6c48bbe208bfa0541f5c1926c4726134f/frontend/src/components/InterventieCard.jsx#L26-L32) | click Delete |
 | S5-R4 | header counter derived, not in state | [frontend/src/App.jsx#L58](https://github.com/Hoboc0p/MotoLog/blob/a0e579a6c48bbe208bfa0541f5c1926c4726134f/frontend/src/App.jsx#L58) | toggle, watch header |
 | S5-R5 | immutable updates (no push, splice, assignment) | [frontend/src/App.jsx#L29-L37](https://github.com/Hoboc0p/MotoLog/blob/a0e579a6c48bbe208bfa0541f5c1926c4726134f/frontend/src/App.jsx#L29-L37) | read |

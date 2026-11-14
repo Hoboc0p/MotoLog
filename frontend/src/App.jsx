@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import InterventiiList from "./components/InterventiiList.jsx";
-import { fetchInterventii } from "./api.js";
+import InterventieForm from "./components/InterventieForm.jsx";
+import { fetchInterventii, createInterventie, updateInterventie, deleteInterventie } from "./api.js";
 
 const MOTOCICLETE = [
   { id: "toate", nume: "Toate Motocicletele", model: "Flotă completă", icon: "🏍️" },
@@ -45,14 +46,31 @@ export default function App() {
     };
   }, []);
 
-  function handleToggle(id) {
-    setInterventii((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, is_done: !item.is_done } : item))
-    );
+  // API Call: Adăugare lucrare nouă
+  async function handleAdd(taskData) {
+    const creat = await createInterventie(taskData);
+    setInterventii((prev) => [...prev, creat]);
   }
 
-  function handleDelete(id) {
-    setInterventii((prev) => prev.filter((item) => item.id !== id));
+  // API Call: Bifare/Debifare
+  async function handleToggle(id) {
+    const currentTask = interventii.find((t) => t.id === id);
+    try {
+      const actualizat = await updateInterventie(id, { is_done: !currentTask.is_done });
+      setInterventii((prev) => prev.map((t) => (t.id === id ? actualizat : t)));
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  // API Call: Ștergere
+  async function handleDelete(id) {
+    try {
+      await deleteInterventie(id);
+      setInterventii((prev) => prev.filter((t) => t.id !== id));
+    } catch (err) {
+      setError(err.message);
+    }
   }
 
   function handleClearDone() {
@@ -137,6 +155,12 @@ ${active.length > 0 ? active.map(i => `⏳ [${i.type}] ${i.title} — ${i.cost} 
               );
             })}
           </div>
+
+          {/* Formularul nou, pus sub motociclete */}
+          <div style={{ marginTop: "24px" }}>
+            <h3>Adaugă Lucrare Nouă</h3>
+            <InterventieForm onAdd={handleAdd} />
+          </div>
         </aside>
 
         <section className="garage-content">
@@ -192,16 +216,17 @@ ${active.length > 0 ? active.map(i => `⏳ [${i.type}] ${i.title} — ${i.cost} 
               </div>
             </div>
 
-            {/* Cele trei stări: Încărcare, Eroare sau Conținut */}
-            {loading && <p className="info">Se încarcă garajul...</p>}
+            {/* Marcajele data-testid pe mesaje conform cerinței */}
+            {loading && <p className="info" data-testid="loading">Se încarcă garajul...</p>}
 
             {error && (
-              <p className="error">
-                Nu am putut încărca datele: {error}. Rulează <code>npm run api</code>?
+              <p className="error" data-testid="error">
+                Eroare: {error}. Verifică conexiunea la API.
               </p>
             )}
 
-            {!loading && !error && (
+            {/* Randarea listei chiar dacă există o eroare de Toggle/Delete */}
+            {!loading && (
               <InterventiiList
                 interventii={interventiiFiltrate}
                 onToggle={handleToggle}
