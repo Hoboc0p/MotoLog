@@ -6,7 +6,7 @@
 
 ## Conversations
 
-- <https://share.gemini.google/ak59AxZYUPW7>
+- <https://share.gemini.google/kVOwuLveUqdA>
 
 ## Key requests
 
