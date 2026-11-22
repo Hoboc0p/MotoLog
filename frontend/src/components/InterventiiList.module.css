@@ -1,0 +1,34 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px 16px;
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.emptyState h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.emptyState p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}

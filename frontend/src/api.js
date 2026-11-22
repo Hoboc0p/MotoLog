@@ -40,3 +40,7 @@ export function updateInterventie(id, changes) {
 export function deleteInterventie(id) {
   return request(`/interventii/${id}`, { method: "DELETE" });
 }
+
+export function fetchInterventie(id) {
+  return request(`/interventii/${id}`);
+}

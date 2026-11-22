@@ -37,7 +37,8 @@ Open `index.html` in a browser. No build step, no server.
 - [x] Stage 5: local state and events
 - [x] Stage 6: loading data from a mock API
 - [x] Stage 7: form and validation
-- [ ] Stage 8: routing and detail page
+- [x] Stage 8: routing and detail page
+- [ ] Stage 9: own backend with Express
 
 ## Stage 2: data logic
 Plain JavaScript, no DOM. moto.js holds the array and the functions that read and change it. Results are printed in the browser console (F12).
@@ -69,6 +70,10 @@ and shows a loading state and an error state.
 Tasks can be added from the page. The form is controlled and validated,
 and every change (add, toggle, delete) goes to the API before it shows up
 in the list.
+
+## Stage 8: routing and detail page
+Three pages behind React Router: the list, a detail page at `/tasks/:id`,
+and an about page, plus a 404 page. Component styles moved to CSS Modules.
 
 
 ## Checklist

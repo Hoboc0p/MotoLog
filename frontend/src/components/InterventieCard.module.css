@@ -1,0 +1,104 @@
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--accent);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.done {
+  border-left-color: var(--muted);
+  opacity: 0.7;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.main input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+  display: grid;
+  place-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.main input[type="checkbox"]:hover {
+  border-color: var(--accent);
+}
+
+.main input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.main input[type="checkbox"]:checked::before {
+  content: "✔";
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.title {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.title:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.done .title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.costTag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+@media (max-width: 700px) {
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

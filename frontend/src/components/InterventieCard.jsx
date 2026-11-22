@@ -1,33 +1,38 @@
-const BADGE_CLASSES = {
-  "Consumabile": "badge-consumabile",
-  "Reparație": "badge-reparatie",
-  "Inspecție": "badge-inspectie"
-};
+import { Link } from "react-router-dom";
+import { BADGE_CLASSES } from "../constants.js";
+import styles from "./InterventieCard.module.css";
 
 export default function InterventieCard({ interventie, onToggle, onDelete }) {
   const badgeClass = BADGE_CLASSES[interventie.type] || "";
 
   return (
-    <li 
-      className={interventie.is_done ? "item-card done" : "item-card"}
+    <li
+      className={interventie.is_done ? `${styles.card} ${styles.done}` : styles.card}
       data-testid="item"
       data-id={interventie.id}
     >
-      <label className="task-main">
+      <div className={styles.main}>
         <input
           type="checkbox"
           checked={interventie.is_done}
           onChange={() => onToggle(interventie.id)}
+          aria-label={`Marchează ${interventie.title}`}
           data-testid="item-toggle"
         />
         <div>
-          <h3 data-testid="item-title">{interventie.title}</h3>
-          <div className="card-tags">
+          <Link
+            to={`/interventii/${interventie.id}`}
+            className={styles.title}
+            data-testid="item-link"
+          >
+            {interventie.title}
+          </Link>
+          <div className={styles.tags}>
             <span className={`badge ${badgeClass}`}>{interventie.type}</span>
-            <span className="cost-tag">{interventie.cost} lei</span>
+            <span className={styles.costTag}>{interventie.cost} lei</span>
           </div>
         </div>
-      </label>
+      </div>
       <button
         className="btn-danger"
         onClick={() => onDelete(interventie.id)}

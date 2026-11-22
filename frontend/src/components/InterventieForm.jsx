@@ -1,17 +1,8 @@
 import { useState } from "react";
+import { MOTOCICLETE, CATEGORII } from "../constants.js";
+import styles from "./InterventieForm.module.css";
 
-const MOTOCICLETE = [
-  { value: "yamaha", label: "Yamaha MT-07" },
-  { value: "honda", label: "Honda Hornet" },
-  { value: "kawasaki", label: "Kawasaki Ninja 400" }
-];
-
-const CATEGORII = [
-  { value: "Consumabile", label: "Consumabile" },
-  { value: "Reparație", label: "Reparație" },
-  { value: "Inspecție", label: "Inspecție" }
-];
-
+const MOTO_OPTIONS = MOTOCICLETE.filter((m) => m.id !== "toate");
 const TITLU_MAX = 80;
 
 export default function InterventieForm({ onAdd }) {
@@ -19,7 +10,6 @@ export default function InterventieForm({ onAdd }) {
   const [motoId, setMotoId] = useState("yamaha");
   const [type, setType] = useState("Consumabile");
   const [cost, setCost] = useState("");
-
   const [eroare, setEroare] = useState("");
   const [trimite, setTrimite] = useState(false);
 
@@ -27,25 +17,22 @@ export default function InterventieForm({ onAdd }) {
     const t = titlu.trim();
     if (t === "") return "Titlul lucrării este obligatoriu.";
     if (t.length > TITLU_MAX) return `Titlul are maximum ${TITLU_MAX} de caractere.`;
-    
     const costNum = Number(cost);
     if (!cost || costNum < 0) return "Te rog introdu un cost valid (pozitiv).";
-    
     return "";
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    
     const mesaj = valideaza();
     if (mesaj) {
       setEroare(mesaj);
       return;
     }
-    
+
     setEroare("");
     setTrimite(true);
-    
+
     try {
       await onAdd({
         motoId,
@@ -54,8 +41,6 @@ export default function InterventieForm({ onAdd }) {
         cost: Number(cost),
         is_done: false
       });
-      
-      // Golire câmpuri la succes
       setTitlu("");
       setCost("");
       setMotoId("yamaha");
@@ -68,7 +53,7 @@ export default function InterventieForm({ onAdd }) {
   }
 
   return (
-    <form className="task-form garage-form" onSubmit={handleSubmit} noValidate data-testid="form">
+    <form className={styles.form} onSubmit={handleSubmit} noValidate data-testid="form">
       <label>
         Titlu lucrare
         <input
@@ -81,7 +66,7 @@ export default function InterventieForm({ onAdd }) {
           data-testid="form-title"
         />
       </label>
-      
+
       <label>
         Motocicletă
         <select
@@ -89,13 +74,13 @@ export default function InterventieForm({ onAdd }) {
           onChange={(e) => setMotoId(e.target.value)}
           data-testid="form-motoId"
         >
-          {MOTOCICLETE.map((m) => (
-            <option key={m.value} value={m.value}>{m.label}</option>
+          {MOTO_OPTIONS.map((m) => (
+            <option key={m.id} value={m.id}>{m.nume}</option>
           ))}
         </select>
       </label>
 
-      <div className="form-row">
+      <div className={styles.row}>
         <label>
           Categorie
           <select
@@ -108,7 +93,7 @@ export default function InterventieForm({ onAdd }) {
             ))}
           </select>
         </label>
-        
+
         <label>
           Cost (lei)
           <input
@@ -127,8 +112,8 @@ export default function InterventieForm({ onAdd }) {
           {eroare}
         </p>
       )}
-      
-      <button type="submit" disabled={trimite} className="btn-submit" data-testid="form-submit">
+
+      <button type="submit" disabled={trimite} className={styles.submitBtn} data-testid="form-submit">
         {trimite ? "Se salvează..." : "Adaugă Lucrare"}
       </button>
     </form>
