@@ -38,7 +38,8 @@ Open `index.html` in a browser. No build step, no server.
 - [x] Stage 6: loading data from a mock API
 - [x] Stage 7: form and validation
 - [x] Stage 8: routing and detail page
-- [ ] Stage 9: own backend with Express
+- [x] Stage 9: own backend with Express
+- [ ] Stage 10: MariaDB and full CRUD
 
 ## Stage 2: data logic
 Plain JavaScript, no DOM. moto.js holds the array and the functions that read and change it. Results are printed in the browser console (F12).
@@ -74,6 +75,14 @@ in the list.
 ## Stage 8: routing and detail page
 Three pages behind React Router: the list, a detail page at `/tasks/:id`,
 and an about page, plus a 404 page. Component styles moved to CSS Modules.
+
+## Stage 9: own backend
+json-server is gone. The API is an Express server in `backend/`, with REST
+routes, server side validation and CORS. Data is still kept in memory and
+resets on restart.
+## How to run
+ cd backend && npm install && npm run dev # terminal 1, port 3001
+ cd frontend && npm install && npm run dev # terminal 2, port 5173
 
 
 ## Checklist
